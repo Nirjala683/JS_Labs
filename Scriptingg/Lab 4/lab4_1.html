@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Odd Bold Even Normal</title>
+</head>
+<body>
+
+<h2>Numbers from 50 to 60</h2>
+
+<button onclick="displayNumbers()">Display Numbers</button>
+
+<p id="result"></p>
+
+<script>
+
+function displayNumbers(){
+
+    let output = "";
+
+    for(let i = 50; i <= 60; i++){
+
+        if(i % 2 == 0){
+            output += i + "<br>";
+        }
+        else{
+            output += "<b>" + i + "</b><br>";
+        }
+
+    }
+
+    document.getElementById("result").innerHTML = output;
+
+}
+
+</script>
+
+</body>
+</html>
