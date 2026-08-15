@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Student Registration</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+
+        body {
+            font-family: Arial;
+        }
+
+        form {
+            width: 400px;
+            margin: 30px auto;
+            padding: 25px;
+            border: 1px solid gray;
+        }
+
+        input {
+            width: 100%;
+            padding: 9px;
+            margin: 8px 0 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        #response {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<form id="studentForm">
+
+    <h2>Student Registration</h2>
+
+    <label>Name</label>
+    <input type="text" id="name">
+
+    <label>Email</label>
+    <input type="text" id="email">
+
+    <label>Phone</label>
+    <input type="text" id="phone">
+
+    <label>Password</label>
+    <input type="password" id="password">
+
+    <label>Confirm Password</label>
+    <input type="password" id="confirmPassword">
+
+    <button type="submit">Register</button>
+
+    <div id="response"></div>
+
+</form>
+
+<script>
+
+$(document).ready(function() {
+
+    $("#studentForm").submit(function(event) {
+
+        event.preventDefault();
+
+        let name = $("#name").val().trim();
+        let email = $("#email").val().trim();
+        let phone = $("#phone").val().trim();
+        let password = $("#password").val();
+        let confirmPassword = $("#confirmPassword").val();
+
+        $("#response").removeClass("error").text("");
+
+        // Name validation
+        if (name == "") {
+            $("#response").text("Name is required.").addClass("error");
+            return;
+        }
+
+        // Email validation
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
+            $("#response").text("Enter a valid email.").addClass("error");
+            return;
+        }
+
+        // Phone validation
+        let phonePattern = /^[0-9]{10}$/;
+
+        if (!phonePattern.test(phone)) {
+            $("#response")
+                .text("Phone must contain exactly 10 digits.")
+                .addClass("error");
+            return;
+        }
+
+        // Password validation
+        if (password.length < 8) {
+            $("#response")
+                .text("Password must be at least 8 characters.")
+                .addClass("error");
+            return;
+        }
+
+        // Confirm password
+        if (password != confirmPassword) {
+            $("#response")
+                .text("Passwords do not match.")
+                .addClass("error");
+            return;
+        }
+
+        // AJAX
+        $.ajax({
+
+            url: "register.php",
+
+            type: "POST",
+
+            data: {
+                name: name,
+                email: email,
+                phone: phone,
+                password: password
+            },
+
+            success: function(response) {
+
+                $("#response")
+                    .removeClass("error")
+                    .text(response);
+
+                $("#studentForm")[0].reset();
+            },
+
+            error: function() {
+
+                $("#response")
+                    .text("Server error occurred.")
+                    .addClass("error");
+            }
+
+        });
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
