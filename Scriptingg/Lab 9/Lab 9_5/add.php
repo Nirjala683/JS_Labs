@@ -14,20 +14,12 @@ if ($name == '' || $roll == '' || $course == '' || $semester == '') {
 
 }
 
-$sql = "INSERT INTO students
-        (name, roll_no, course, semester)
+$sql = "INSERT INTO students (name, roll_no, course, semester)
         VALUES (?, ?, ?, ?)";
 
 $stmt = mysqli_prepare($conn, $sql);
 
-mysqli_stmt_bind_param(
-    $stmt,
-    "sssi",
-    $name,
-    $roll,
-    $course,
-    $semester
-);
+mysqli_stmt_bind_param($stmt, "sssi", $name,  $roll, $course, $semester );
 
 if (mysqli_stmt_execute($stmt)) {
 

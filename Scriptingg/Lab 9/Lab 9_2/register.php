@@ -22,8 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: Semester must be between 1 and 8.";
 
     } 
-    else {
-
+    else { 
         echo "Student registered successfully!";
 
     }

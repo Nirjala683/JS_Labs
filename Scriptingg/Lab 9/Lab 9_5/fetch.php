@@ -20,15 +20,11 @@ if (mysqli_num_rows($result) > 0) {
 
         echo "<td>";
 
-        echo "<button onclick='editStudent(" .
-            $row['id'] .
-            ")'>Edit</button>";
+        echo "<button onclick='editStudent(" .$row['id'] .")'>Edit</button>";
 
         echo " ";
 
-        echo "<button onclick='deleteStudent(" .
-            $row['id'] .
-            ")'>Delete</button>";
+        echo "<button onclick='deleteStudent(" .$row['id'] .")'>Delete</button>";
 
         echo "</td>";
 

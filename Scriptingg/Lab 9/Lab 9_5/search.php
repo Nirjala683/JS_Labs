@@ -4,9 +4,7 @@ include "db.php";
 
 $name = trim($_POST['name'] ?? '');
 
-$sql = "SELECT * FROM students
-        WHERE name LIKE ?
-        ORDER BY id DESC";
+$sql = "SELECT * FROM students WHERE name LIKE ? ORDER BY id DESC";
 
 $stmt = mysqli_prepare($conn, $sql);
 
